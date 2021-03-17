@@ -1,0 +1,22 @@
+body {
+    position:absolute;
+    font-family:'Courier New', Courier, monospace;
+    background-color: black;
+}
+
+h1 {
+
+}
+
+
+sprite {
+    position: absolute;
+}
+
+scene {
+    position:absolute;
+    width: 640px;
+    height: 480px;
+    visibility: hidden;
+    background-color: white;
+}

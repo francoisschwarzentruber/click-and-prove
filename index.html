@@ -1,0 +1,39 @@
+<html>
+
+<head>
+
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="engine.css" rel="stylesheet">
+    <script src="engine.js"></script>
+</head>
+
+<body>
+
+    <scene id="welcome">
+        <sprite id="mouton" x="100" y="200"></sprite>
+        <h1>Introduction aux algorithmes probabilistes</h1>
+        <a onclick="goto(map)">Start</a>
+    </scene>
+
+    <scene id="map" background="" music="">
+        <a onclick="goto(lasvegas)">Las Vegas</a>
+        <a onclick="goto(montecarlo)">Monte Carlo</a>
+    </scene>
+
+    <scene id="lasvegas" background="" music="">
+        <h1>Las Vegas</h1>
+        <a onclick="goto(map)">Back</a>
+    </scene>
+
+    <scene id="montecarlo" background="" music="">
+        <h1>Monte Carlo</h1>
+        <a onclick="goto(map)">Back</a>
+    </scene>
+</body>
+
+
+<script>
+    show(welcome)
+</script>
+
+</html>
