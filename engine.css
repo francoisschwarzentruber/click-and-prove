@@ -20,3 +20,14 @@ scene {
     visibility: hidden;
     background-color: white;
 }
+
+
+proof {
+    display: inline-block;
+}
+
+infer {
+    border-top: solid 1px black;
+    display: block;
+    text-align: center;
+}
