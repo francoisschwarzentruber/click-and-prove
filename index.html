@@ -1,4 +1,4 @@
-<html>
+<html lang="fr">
 
 <head>
 
@@ -10,18 +10,21 @@
 <body>
 
     <scene id="welcome">
-        <sprite id="mouton" x="100" y="200"></sprite>
-        <h1>Introduction aux algorithmes probabilistes</h1>
-        <a onclick="goto(map)">Start</a>
-<br/><br/><br/>
+        <h1>Tri rapide randomisé</h1>
+        <br /><br /><br />
         <proof>
-<proof>
-                <infer>x=y</infer>
-</proof>
-<proof>
-                <infer>y=z</infer>
-</proof>
-            <infer>\(x=z\)</infer>
+            <proofs>
+                <proof>
+                    <infer speech="le nombre de comparaisons est la somme de X i j, qui vaut 1 quand Si et Sj sont comparés, et 0 sinon">\(X = \sum_{i &#60;j} X_{i, j}\)</infer>
+                    <infer speech="par la linéarité de l'espérance">\(E(X) = \sum_{i&#60;j} E(X_{i, j})\)</infer>
+                </proof>
+                <proof>
+                    <infer>\(E(X_{i, j}) = \) proba que Si ou Sj soit premier pivot dans Si..j</infer>
+                    <infer speech="Car la probabilité que S i ou S j soit le premier pivot parmi les éléments de S i j, vaut 1 sur j moins i+1">\(E(X_{i, j}) = \frac 1 {j-i+1} + \frac 1 {j-i+1} = \frac 2 {j-i+1}\)</infer>
+                </proof>
+            </proofs>
+            <infer speech="On remplace l'espérance de X i j par 2 sur j moins i+1.">\(E(X) = \sum_{i &#60;j } \frac 2 {j-i+1} = 2n \sum_{k=1}^n \frac 1 k\)</infer>
+            <infer speech="Comme c'est une série harmonique, elle est équivalente à log n.">\(E(X) = O(n \log n)\)</infer>
         </proof>
     </scene>
 

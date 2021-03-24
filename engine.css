@@ -1,12 +1,10 @@
 body {
-    position:absolute;
-    font-family:'Courier New', Courier, monospace;
+    position: absolute;
+    font-family: 'Courier New', Courier, monospace;
     background-color: black;
 }
 
-h1 {
-
-}
+h1 {}
 
 
 sprite {
@@ -14,16 +12,22 @@ sprite {
 }
 
 scene {
-    position:absolute;
+    position: absolute;
     width: 640px;
     height: 480px;
     visibility: hidden;
     background-color: white;
 }
 
+proofs {
+    display: flex;
+    align-items: flex-end;
+}
 
 proof {
     display: inline-block;
+    margin-left: 4px;
+    margin-right: 8px;
 }
 
 infer {
