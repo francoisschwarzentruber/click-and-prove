@@ -1,7 +1,6 @@
 body {
     position: absolute;
-    font-family: 'Courier New', Courier, monospace;
-    background-color: black;
+    background-color: white;
 }
 
 h1 {}
@@ -22,6 +21,7 @@ scene {
 proofs {
     display: flex;
     align-items: flex-end;
+    border-bottom: solid 1px black;
 }
 
 proof {
@@ -31,7 +31,7 @@ proof {
 }
 
 infer {
-    border-top: solid 1px black;
+    padding:8px;
     display: block;
     text-align: center;
 }

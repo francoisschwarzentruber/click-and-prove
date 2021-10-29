@@ -5,50 +5,20 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link href="engine.css" rel="stylesheet">
     <script src="engine.js"></script>
+    <meta charset="UTF-8">
 </head>
 
 <body>
 
-    <scene id="welcome">
-        <h1>Tri rapide randomisé</h1>
-        (cette page fonctionne mieux sous Chrome)</br>
-        (cette page est un test, la preuve n'est pas complète)<br />
-        <br />Cliquez sur les parties de la preuve pour entendre les explications.<br /><br /><br />
-        <proof>
-            <proofs>
-                <proof>
-                    <infer speech="le nombre de comparaisons est la somme de X i j, qui vaut 1 quand Si et Sj sont comparés, et 0 sinon">\(X = \sum_{i &#60;j} X_{i, j}\)</infer>
-                    <infer speech="par la linéarité de l'espérance">\(E(X) = \sum_{i&#60;j} E(X_{i, j})\)</infer>
-                </proof>
-                <proof>
-                    <infer>\(E(X_{i, j}) = \) proba que Si ou Sj soit premier pivot dans Si..j</infer>
-                    <infer speech="Car la probabilité que S i ou S j soit le premier pivot parmi les éléments de S i j, vaut 1 sur j moins i+1">\(E(X_{i, j}) = \frac 1 {j-i+1} + \frac 1 {j-i+1} = \frac 2 {j-i+1}\)</infer>
-                </proof>
-            </proofs>
-            <infer speech="On remplace l'espérance de X i j par 2 sur j moins i+1.">\(E(X) = \sum_{i &#60;j } \frac 2 {j-i+1} = 2n \sum_{k=1}^n \frac 1 k\)</infer>
-            <infer speech="Comme c'est une série harmonique, elle est équivalente à log n.">\(E(X) = O(n \log n)\)</infer>
-        </proof>
-    </scene>
+    <h1>Example of a proof</h1>
+    <div id="menu"></div>
+        <div id="proof"></div>
 
-    <scene id="map" background="" music="">
-        <a onclick="goto(lasvegas)">Las Vegas</a>
-        <a onclick="goto(montecarlo)">Monte Carlo</a>
-    </scene>
-
-    <scene id="lasvegas" background="" music="">
-        <h1>Las Vegas</h1>
-        <a onclick="goto(map)">Back</a>
-    </scene>
-
-    <scene id="montecarlo" background="" music="">
-        <h1>Monte Carlo</h1>
-        <a onclick="goto(map)">Back</a>
-    </scene>
 </body>
 
 
 <script>
-    show(welcome)
+ 
 </script>
 
 </html>
