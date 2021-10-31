@@ -1,35 +1,51 @@
 class ProofNode {
     conclusion;
     premisses = [];
-    info = undefined
-
+    info = undefined;
+    proofhidden = false;
     constructor(conclusion) { this.conclusion = conclusion; }
-    addPremisse(premisse) { this.premisses.push(premisse); }
+    addPremisse(premisse) { this.premisses.unshift(premisse); }
 
-    setInfo(info) {this.info = info;}
+    setInfo(info) { this.info = info; }
 
     toDOM() {
         const element = document.createElement("proof");
-
+        const elementInfer = document.createElement("infer");
         if (this.premisses.length >= 1) {
             const elementPremisses = document.createElement("proofs");
             for (const child of this.premisses) {
                 elementPremisses.appendChild(child.toDOM());
             }
             element.appendChild(elementPremisses);
+
+            if (this.proofhidden || (this.premisses.length == 1 && this.premisses[0] instanceof Sequence)) {
+                const elementNext = document.createElement("buttonDevelop");
+                elementNext.innerHTML = "...";
+                element.appendChild(elementNext);
+                elementPremisses.style.display = "none";
+                elementInfer.style.cursor = "pointer";
+                
+                const toggle = () => {
+                    elementPremisses.style.display = (elementPremisses.style.display == "none") ? "" : "none";
+                    elementNext.style.display = (elementPremisses.style.display == "none") ? "" : "none";
+                }
+              //  toggle();
+                elementInfer.onclick = toggle;
+                elementNext.onclick = toggle;
+            }
         }
 
-        const elementInfer = document.createElement("infer");
+
         elementInfer.innerHTML = this.conclusion;
 
-        
-        if(this.info) {
+
+        if (this.info) {
             const elementInfo = document.createElement("info");
             elementInfo.innerHTML = "?";
-            elementInfo.onclick = () => {alert(this.info)};
+            elementInfo.onclick = () => { alert(this.info) };
             elementInfer.appendChild(elementInfo);
         }
-        
+
 
         element.appendChild(elementInfer);
         return element;
@@ -107,11 +123,14 @@ function linesToProof(lines) {
         else if (line.startsWith("\\AxiomC")) {
             nodes.push(new ProofNode(extractContent(line)));
         }
-        if(line.startsWith("\\Info")) {
-            nodes[nodes.length-1].setInfo(extractContent(line));
+        if (line.startsWith("\\Info")) {
+            nodes[nodes.length - 1].setInfo(extractContent(line));
         }
         if (line.startsWith("\\Assume")) {
             nodes.push(new Assumption(extractContent(line)));
+        }
+        if (line.startsWith("\\Hide")) {
+            nodes[nodes.length - 1].proofhidden = true;
         }
         else if (line.startsWith("\\UnaryInfC")) {
             const node = new ProofNode(extractContent(line));

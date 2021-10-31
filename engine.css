@@ -10,20 +10,21 @@ h1 {}
 proofs {
     display: flex;
     align-items: flex-end;
-    border-bottom: solid 1px black;
+    
 }
 
 proof {
     display: inline-block;
     margin-left: 4px;
     margin-right: 8px;
+    margin-top: 8px;
+    
 }
 
 
 
-
 content {
-    display: inline-block;
+    display: inline-grid;
     border-radius: 16px;
     margin: 4px;
     
@@ -34,10 +35,19 @@ proofs > content {
 }
 
 infer {
+    border-top: solid 1px black;
     padding: 8px;
     display: block;
     text-align: center;
 }
+
+buttonDevelop {
+    padding: 8px;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+}
+
 
 
 info {
