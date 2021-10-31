@@ -10,13 +10,6 @@ sprite {
     position: absolute;
 }
 
-scene {
-    position: absolute;
-    width: 640px;
-    height: 480px;
-    visibility: hidden;
-    background-color: white;
-}
 
 proofs {
     display: flex;
@@ -30,8 +23,31 @@ proof {
     margin-right: 8px;
 }
 
+
+
+
+content {
+    display: inline-block;
+    border: pink solid 1px;
+    border-radius: 8px;
+    margin: 4px;
+}
+
+
 infer {
-    padding:8px;
+    padding: 8px;
     display: block;
     text-align: center;
 }
+
+
+assumption {
+    background: #fffec5;
+    box-shadow: 4px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 8px;
+    margin: 6px;
+    display: block;
+    text-align: center;
+}
+

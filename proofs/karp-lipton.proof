@@ -1,0 +1,16 @@
+{
+	{
+	\Assume{Suppose $NP \subseteq P/poly$}
+	\UnaryInfC{$SAT \in P/poly$}
+	\UnaryInfC{there is a $poly(n)$-size circuit family $(C_n^{SAT})_{n \in \mathbb N}$ such that for all Boolean formulas $\phi$ of 	size $n$, $C^{SAT}_n(\phi) = 1$ ssi $\phi$ satisfiable}
+	\UnaryInfC{there is a $poly(n)$-size circuit family $(C_n^{val})_{n \in \mathbb N}$ such that for all Boolean formulas $\phi$ of 	size $n$, if $\phi$ is satisfiable, $C^{val}_n(\phi)$ returns a valuation for $\phi$}
+}
+	\AxiomC{$\forall \vec p \exists \vec q \phi(\vec p, \vec q)$ is QBF-true}
+	\UnaryInfC{iff for all valuations $\nu$ over $\vec p$, there is a valution $\nu'$ over $\vec q$ such that $\nu + \nu' \models \phi$}
+	\UnaryInfC{iff for all valuations $\nu$ over $\vec p$, $\phi(\nu)$ is satisfiable}
+	\BinaryInfC{iff for all valuations $\nu$ over $\vec p$, $C_n^{val}(\phi(\nu)) \models \phi(\nu)$}
+}
+	\UnaryInfC{$\forall \vec p \exists \vec q \phi(\vec p, \vec q)$ is QBF-true iff there is a $poly(|\phi|)$-circuit $C$ such that for all valuations $\nu$ over $\vec p$, $C(\phi(\nu)) \models \phi(\nu)$}
+	\UnaryInfC{$poly(n)$-time $\Sigma_2$ algorithm for $\Pi_2$-$SAT$}
+	\UnaryInfC{$\Pi^p_2 \subseteq \Sigma^p_2$}
+	\UnaryInfC{$PH = \Sigma^p_2$}
