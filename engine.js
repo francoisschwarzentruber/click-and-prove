@@ -1,9 +1,12 @@
 class ProofNode {
     conclusion;
     premisses = [];
+    info = undefined
 
     constructor(conclusion) { this.conclusion = conclusion; }
     addPremisse(premisse) { this.premisses.push(premisse); }
+
+    setInfo(info) {this.info = info;}
 
     toDOM() {
         const element = document.createElement("proof");
@@ -18,6 +21,16 @@ class ProofNode {
 
         const elementInfer = document.createElement("infer");
         elementInfer.innerHTML = this.conclusion;
+
+        
+        if(this.info) {
+            const elementInfo = document.createElement("info");
+            elementInfo.innerHTML = "?";
+            elementInfo.onclick = () => {alert(this.info)};
+            elementInfer.appendChild(elementInfo);
+        }
+        
+
         element.appendChild(elementInfer);
         return element;
     }
@@ -94,6 +107,9 @@ function linesToProof(lines) {
         else if (line.startsWith("\\AxiomC")) {
             nodes.push(new ProofNode(extractContent(line)));
         }
+        if(line.startsWith("\\Info")) {
+            nodes[nodes.length-1].setInfo(extractContent(line));
+        }
         if (line.startsWith("\\Assume")) {
             nodes.push(new Assumption(extractContent(line)));
         }
@@ -141,7 +157,7 @@ async function load(filename) {
 
 window.onload = () => {
     //load("bidirectional");
-    load("sqrt2irrationnal");
+    load("sqrt2irrational");
     // load("karp-lipton");
 
 
@@ -161,7 +177,7 @@ window.onload = () => {
 
 function say(str) {
     const utterance = new SpeechSynthesisUtterance(str);
-    utterance.lang = "fr";
+    utterance.lang = "en";
     speechSynthesis.speak(utterance);
 }
 

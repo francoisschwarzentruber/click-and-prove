@@ -1,0 +1,38 @@
+	{
+		{
+			\Assume{Suppose that $\sqrt 2$ rational}
+			\UnaryInfC{$\sqrt 2 = \frac a b$ irreducible, for some integers $a$ and $b$}
+			\Info{By "irreducible", we mean a fraction that can not be simplified. For instance 2/4 can be simplified into 1/2, but 3/8 cannot.}
+			\UnaryInfC{$2 = \frac {a^2} {b^2}$}
+			\UnaryInfC{$2b^2 = a^2$}
+		}
+		{
+			\AxiomC{$2b^2 = a^2$}
+			\UnaryInfC{$a^2$ is even}
+
+			{
+				\Assume{Suppose $a$ is odd.}
+				\UnaryInfC{$a = 2k+1$ for some integer $k$}
+				\UnaryInfC{$a^2 = 4k^2+4k+1$}
+				\UnaryInfC{$a^2$ is odd}
+			}
+			\UnaryInfC{$a^2$ is even $\Rightarrow$ $a$ is even}
+			\BinaryInfC{$a$ is even}
+		}
+		{
+			\AxiomC{$a$ is even}
+			\UnaryInfC{$a = 2k$ for some $k$}
+			\AxiomC{$2b^2 = a^2$}
+			\BinaryInfC{$2b^2 = 4k^2$}
+			\UnaryInfC{$b^2 = 2k^2$}
+			\UnaryInfC{$b^2$ is even}
+			\AxiomC{$b^2$ is even $\Rightarrow$ $b$ is even}
+			\BinaryInfC{$b$ is even}
+			\AxiomC{$a$ is even}
+			\AxiomC{$\sqrt 2 = \frac a b$ irreducible}
+			\TrinaryInfC{$\bot$}
+		}
+		
+		
+	}
+	\UnaryInfC{$\sqrt 2$ is irrational}

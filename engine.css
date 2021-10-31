@@ -6,10 +6,6 @@ body {
 h1 {}
 
 
-sprite {
-    position: absolute;
-}
-
 
 proofs {
     display: flex;
@@ -28,11 +24,14 @@ proof {
 
 content {
     display: inline-block;
-    border: pink solid 1px;
-    border-radius: 8px;
+    border-radius: 16px;
     margin: 4px;
+    
 }
 
+proofs > content {
+    background-color:rgba(255, 128, 128, 0.2);
+}
 
 infer {
     padding: 8px;
@@ -41,9 +40,16 @@ infer {
 }
 
 
+info {
+    padding:4px;
+    margin: 4px;
+    background: rgb(0, 128, 0);
+    color: white;
+    cursor: pointer;
+}
+
 assumption {
-    background: #fffec5;
-    box-shadow: 4px 4px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 128, 0.5);    
     border-radius: 8px;
     padding: 8px;
     margin: 6px;
