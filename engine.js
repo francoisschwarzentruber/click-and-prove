@@ -228,17 +228,35 @@ function linesToProof(lines) {
 
 
 async function load(filename) {
+    document.getElementById("menu").style.display = "none";
     const response = await fetch(`proofs/${filename}.proof`);
     const text = await response.text();
 
     const proof = linesToProof(text.split("\n").map((line) => line.trim()));
+    document.getElementById("proof").innerHTML = "";
     document.getElementById("proof").appendChild(proof.toDOM());
     MathJax.typeset();
 }
 
 window.onload = () => {
+    document.querySelectorAll("#menu a").forEach(function(a) {
+        a.href = `?id=${a.id}`;
+      });
+
+      let url = window.location.toString();
+      let split = url.split('?');
+
+      if(split.length > 1) {
+        let searchParams = new URLSearchParams(split[1]);
+        if(searchParams.get("id")) {
+            const id = searchParams.get("id");
+            console.log("loading " + id)
+            load(id);
+        }
+      }
+      
+
     //load("bidirectional");
-    load("sqrt2irrational");
     // load("karp-lipton");
 //    load("dijkstra");
 

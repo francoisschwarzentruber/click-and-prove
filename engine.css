@@ -1,8 +1,14 @@
-body {
-    position: absolute;
-    background-color: white;
+
+
+#menu a {
+    cursor: pointer;
+    display:block;
 }
 
+
+a:hover {
+    color:blue;
+}
 
 
 proofs {
