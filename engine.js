@@ -1,3 +1,7 @@
+let domElements = {};
+
+
+
 class ProofNode {
     conclusion;
     premisses = [];
@@ -22,14 +26,32 @@ class ProofNode {
                 const elementNext = document.createElement("buttonDevelop");
                 elementNext.innerHTML = "...";
                 element.appendChild(elementNext);
-                elementPremisses.style.display = "none";
+
                 elementInfer.style.cursor = "pointer";
-                
+
+                elementInfer.classList.add("developpable");
+                elementNext.classList.add("developpable");
+
+                elementPremisses.style.display = "none";
+                elementPremisses.classList.add("hide");
+                // elementPremisses.style.visibility = "hidden";
+                //console.log("miaou : " + elementPremisses.clientWidth)
+
                 const toggle = () => {
-                    elementPremisses.style.display = (elementPremisses.style.display == "none") ? "" : "none";
-                    elementNext.style.display = (elementPremisses.style.display == "none") ? "" : "none";
+                    elementPremisses.style.display = "";//(elementPremisses.style.display == "none") ? "" : "none";
+
+                    elementPremisses.classList.toggle("hide");
+                    elementPremisses.classList.toggle("show");
+
+                    if (elementPremisses.classList.contains("hide"))
+                        setTimeout(() => elementPremisses.style.display = "none", 500);
+
+                    elementNext.style.display = (elementPremisses.classList.contains("hide")) ? "" : "none";
+                    /* elementPremisses.style.visibility = (elementPremisses.style.visibility == "hidden") ? "" : "hidden";
+                     elementNext.style.display = (elementNext.style.display == "none") ? "" : "none";
+                     */
                 }
-              //  toggle();
+                //  toggle();
                 elementInfer.onclick = toggle;
                 elementNext.onclick = toggle;
             }
@@ -38,6 +60,7 @@ class ProofNode {
 
         elementInfer.innerHTML = this.conclusion;
 
+        domElements[this.conclusion] = element;
 
         if (this.info) {
             const elementInfo = document.createElement("info");
@@ -63,6 +86,25 @@ class Assumption {
     }
 }
 
+
+
+
+class AlreadyProvenFact {
+    constructor(assumption) { this.assumption = assumption; }
+
+    toDOM() {
+        const element = document.createElement("alreadyprovenfact");
+        element.innerHTML = this.assumption;
+
+        element.onclick = () => {
+            const fact = domElements[this.assumption];
+            if (fact)
+                fact.classList.add("shake");
+            setTimeout(() => fact.classList.remove("shake"), 1000);
+        }
+        return element;
+    }
+}
 
 class Sequence {
     content = [];
@@ -128,6 +170,9 @@ function linesToProof(lines) {
         }
         if (line.startsWith("\\Assume")) {
             nodes.push(new Assumption(extractContent(line)));
+        }
+        if (line.startsWith("\\AlreadyProven")) {
+            nodes.push(new AlreadyProvenFact(extractContent(line)));
         }
         if (line.startsWith("\\Hide")) {
             nodes[nodes.length - 1].proofhidden = true;

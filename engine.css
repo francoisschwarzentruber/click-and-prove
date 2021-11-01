@@ -3,14 +3,12 @@ body {
     background-color: white;
 }
 
-h1 {}
-
 
 
 proofs {
     display: flex;
     align-items: flex-end;
-    
+    transition: opacity 500ms;
 }
 
 proof {
@@ -18,7 +16,7 @@ proof {
     margin-left: 4px;
     margin-right: 8px;
     margin-top: 8px;
-    
+    transition: all 5s;
 }
 
 
@@ -27,11 +25,11 @@ content {
     display: inline-grid;
     border-radius: 16px;
     margin: 4px;
-    
+
 }
 
-proofs > content {
-    background-color:rgba(255, 128, 128, 0.2);
+proofs>content {
+    background-color: rgba(255, 128, 128, 0.2);
 }
 
 infer {
@@ -41,17 +39,25 @@ infer {
     text-align: center;
 }
 
+
 buttonDevelop {
     padding: 8px;
-    display: block;
+    display: flex;
     text-align: center;
     cursor: pointer;
+    background-color:rgba(255, 128, 128, 0.2);
+    width:50%;
+    flex-flow: column;
+    margin-left:25%;
+    margin-right:25%;
+    border-radius: 8px;
+
+    
 }
 
 
-
 info {
-    padding:4px;
+    padding: 4px;
     margin: 4px;
     background: rgb(0, 128, 0);
     color: white;
@@ -59,7 +65,7 @@ info {
 }
 
 assumption {
-    background: rgba(255, 255, 128, 0.5);    
+    background: rgba(255, 255, 128, 0.5);
     border-radius: 8px;
     padding: 8px;
     margin: 6px;
@@ -67,3 +73,46 @@ assumption {
     text-align: center;
 }
 
+
+
+.developpable:hover {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) repeat;
+}
+
+
+.shake {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+
+
+.show {
+    opacity: 1.0;
+}
+
+
+.hide {
+    opacity: 0.0;
+}
+
+alreadyprovenfact {
+    color: blue;
+}
+
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
