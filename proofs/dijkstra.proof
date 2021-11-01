@@ -1,0 +1,73 @@
+
+
+{
+    \AxiomC{Initiation: true}
+    \AxiomC{Invariant by one iteration}
+\BinaryInfC{$\delta \leq d$ is an invariant}
+}
+
+
+
+{
+\AxiomC{Initialization: no vertex is popped, so the invariant holds}
+}
+
+
+\Assume{Suppose at some point (when no all vertices are popped) that for all popped $t$, $d[t] = \delta(t)$}
+
+\UnaryInfC{Let $u$ be the next vertex to be popped.}
+
+\Assume{$u = s$}
+\UnaryInfC{$d[u] = \delta(u) = 0$}
+
+\Assume{$u \neq s$}
+\UnaryInfC{no path from $s$ to $u$}
+\UnaryInfC{$d[u] = \delta(u) = +\infty$}
+\Assume{Consider a shortest path $\pi$ from $s$ to $u$}
+\UnaryInfC{Let $y$ the first vertex in $\pi$ that is in the priority queue}
+\UnaryInfC{Let $x$ the predecessor of $y$ in $\pi$}
+\UnaryInfC{$x$ is not in the priority queue}
+
+            \AxiomC{invariant}
+            \AxiomC{$x$ is popped}
+            \BinaryInfC{$d[x] = \delta(x)$}
+
+            \AxiomInfC{the edge $x\rightarrow y$ has been treated}
+            \UnaryInfC{$d[y] \leq d[x] + weight(x, y)$}
+        
+
+            \AxiomC{the subpath $\pi[s..x]$ is a shortest path (of weight $\delta(x)$)}
+            \AxiomC{the subpath $\pi[s..y]$ is a shortest path (of weight $\delta(y)$)}
+            \AxiomC{$\pi[s..y] := \pi[s..x].y$}
+            \TrinaryInfC{$\delta(y) = \delta[x] + weight(x, y)$}
+
+        \TrinaryInfC{$d[y] \leq \delta[y]$}
+    
+
+
+
+    \AxiomC{only positive weights in the graph}
+    \UnaryInfC{$\delta[y] \leq \delta(u)$}
+
+
+    \AlreadyProven{$\delta \leq d$}
+    \UnaryInfC{$\delta[u] \leq d(u)$}
+
+
+    \AxiomC{$u$ is the next vertex to be popped}
+    \UnaryInfC{$d[u]$ is the minimum among unpopped vertices}
+    \UnaryInfC{$d[u] \leq d[y]$}
+
+
+infer4{$d[u] = \delta(u)$}
+\Hide
+
+
+
+infer3{$d[u] = \delta[u]$}
+infer2{$d[u] = \delta[u]$}
+infer2{for all popped $t$, $d[t] = \delta(t)$ is an invariant}
+
+
+
+\UnaryInfC{Dijkstra's algorithm is correct: it returns the distance from the source $s$ to other vertices in the graph}

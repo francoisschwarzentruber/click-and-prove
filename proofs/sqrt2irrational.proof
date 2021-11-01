@@ -5,7 +5,6 @@
 			\UnaryInfC{$2 = \frac {a^2} {b^2}$}
 			\UnaryInfC{$2b^2 = a^2$}
 		
-
 			\AxiomC{$\sqrt 2 = \frac a b$ irreducible}
 			
 			\AlreadyProven{$2b^2 = a^2$}

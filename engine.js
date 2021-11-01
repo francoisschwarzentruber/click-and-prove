@@ -177,19 +177,36 @@ function linesToProof(lines) {
         if (line.startsWith("\\Hide")) {
             nodes[nodes.length - 1].proofhidden = true;
         }
-        else if (line.startsWith("\\UnaryInfC")) {
+        else if (line.startsWith("\\UnaryInfC")|| line.startsWith("infer{")) {
             const node = new ProofNode(extractContent(line));
             node.addPremisse(testExist(nodes.pop()));
             nodes.push(node);
         }
-        else if (line.startsWith("\\BinaryInfC")) {
+        else if (line.startsWith("\\BinaryInfC")|| line.startsWith("infer2{")) {
             const node = new ProofNode(extractContent(line));
             node.addPremisse(testExist(nodes.pop()));
             node.addPremisse(testExist(nodes.pop()));
             nodes.push(node);
         }
-        else if (line.startsWith("\\TrinaryInfC")) {
+        else if (line.startsWith("\\TrinaryInfC") || line.startsWith("infer3{")) {
             const node = new ProofNode(extractContent(line));
+            node.addPremisse(testExist(nodes.pop()));
+            node.addPremisse(testExist(nodes.pop()));
+            node.addPremisse(testExist(nodes.pop()));
+            nodes.push(node);
+        }
+        else if (line.startsWith("infer4{")) {
+            const node = new ProofNode(extractContent(line));
+            node.addPremisse(testExist(nodes.pop()));
+            node.addPremisse(testExist(nodes.pop()));
+            node.addPremisse(testExist(nodes.pop()));
+            node.addPremisse(testExist(nodes.pop()));
+            nodes.push(node);
+        }
+        else if (line.startsWith("infer5{")) {
+            const node = new ProofNode(extractContent(line));
+            node.addPremisse(testExist(nodes.pop()));
+            node.addPremisse(testExist(nodes.pop()));
             node.addPremisse(testExist(nodes.pop()));
             node.addPremisse(testExist(nodes.pop()));
             node.addPremisse(testExist(nodes.pop()));
@@ -223,27 +240,9 @@ window.onload = () => {
     //load("bidirectional");
     load("sqrt2irrational");
     // load("karp-lipton");
-
-
-    let infers = document.getElementsByTagName("infer");
-    for (let i = 0; i < infers.length; i++) {
-        const el = infers[i];
-        el.onclick = () => {
-            const txt = el.getAttribute("speech");
-            if (txt != null)
-                say(txt);
-        };
-    }
+//    load("dijkstra");
 
 
 }
-
-
-function say(str) {
-    const utterance = new SpeechSynthesisUtterance(str);
-    utterance.lang = "en";
-    speechSynthesis.speak(utterance);
-}
-
 
 
