@@ -20,10 +20,11 @@
 \Assume{$u = s$}
 \UnaryInfC{$d[u] = \delta(u) = 0$}
 
-\Assume{$u \neq s$}
-\UnaryInfC{no path from $s$ to $u$}
+\Assume{$u \neq s$ and no path from $s$ to $u$}
 \UnaryInfC{$d[u] = \delta(u) = +\infty$}
-\Assume{Consider a shortest path $\pi$ from $s$ to $u$}
+
+\Assume{$u \neq s$ and there exists a path from $s$ to $u$}
+\UnaryInfC{Consider a shortest path $\pi$ from $s$ to $u$}
 \UnaryInfC{Let $y$ the first vertex in $\pi$ that is in the priority queue}
 \UnaryInfC{Let $x$ the predecessor of $y$ in $\pi$}
 \UnaryInfC{$x$ is not in the priority queue}
@@ -59,7 +60,8 @@
     \UnaryInfC{$d[u] \leq d[y]$}
 
 
-infer4{$d[u] = \delta(u)$}
+infer4{values $d[u]$ and $\delta(u)$ sandwiched by $d[y]$ and $d[y]$}
+\UnaryInfC{$d[u] = \delta(u)$}
 \Hide
 
 

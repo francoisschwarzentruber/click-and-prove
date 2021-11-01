@@ -32,7 +32,6 @@ class ProofNode {
                 elementInfer.classList.add("developpable");
                 elementNext.classList.add("developpable");
 
-                elementPremisses.style.display = "none";
                 elementPremisses.classList.add("hide");
                 // elementPremisses.style.visibility = "hidden";
                 //console.log("miaou : " + elementPremisses.clientWidth)
@@ -44,9 +43,12 @@ class ProofNode {
                     elementPremisses.classList.toggle("show");
 
                     if (elementPremisses.classList.contains("hide"))
-                        setTimeout(() => elementPremisses.style.display = "none", 500);
-
-                    elementNext.style.display = (elementPremisses.classList.contains("hide")) ? "" : "none";
+                        setTimeout(() => {
+                            //elementPremisses.style.display = "none"
+                            elementNext.style.display = "";
+                        }, 500);
+                    else
+                    elementNext.style.display = "none";
                     /* elementPremisses.style.visibility = (elementPremisses.style.visibility == "hidden") ? "" : "hidden";
                      elementNext.style.display = (elementNext.style.display == "none") ? "" : "none";
                      */

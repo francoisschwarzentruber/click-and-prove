@@ -14,7 +14,8 @@ a:hover {
 proofs {
     display: flex;
     align-items: flex-end;
-    transition: opacity 500ms;
+    transition: all 500ms;
+    transform-origin: bottom;
 }
 
 proof {
@@ -94,11 +95,17 @@ assumption {
 
 .show {
     opacity: 1.0;
+    max-width:2000px;
+    max-height:2000px;
+    scale:1.0;
 }
 
 
 .hide {
     opacity: 0.0;
+    max-width:0px;
+    max-height:0px;
+    scale:0.0;
 }
 
 alreadyprovenfact {
