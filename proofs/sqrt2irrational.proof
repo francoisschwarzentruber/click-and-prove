@@ -1,21 +1,27 @@
+{
+	{
+		\Assume{Suppose $a$ is odd.}
+		\UnaryInfC{$a = 2k+1$ for some integer $k$}
+		\UnaryInfC{$a^2 = 4k^2+4k+1$}
+		\UnaryInfC{$a^2$ is odd}
+	}
+	\UnaryInfC{$a^2$ is even $\Rightarrow$ $a$ is even}
+	\Label{$b^2$ is even $\Rightarrow$ $b$ is even}
+}
+
 	{
 			\Assume{Suppose that $\sqrt 2$ rational}
 			\UnaryInfC{$\sqrt 2 = \frac a b$ irreducible, for some integers $a$ and $b$}
-			\Info{By "irreducible", we mean a fraction that can not be simplified. For instance 2/4 can be simplified into 1/2, but 3/8 cannot.}
+			\Label{$\sqrt 2 = \frac a b$ irreducible}
 			\UnaryInfC{$2 = \frac {a^2} {b^2}$}
 			\UnaryInfC{$2b^2 = a^2$}
 		
-			\AxiomC{$\sqrt 2 = \frac a b$ irreducible}
+			\AlreadyProven{$\sqrt 2 = \frac a b$ irreducible}
 			
 			\AlreadyProven{$2b^2 = a^2$}
 			\UnaryInfC{$a^2$ is even}
-			{
-				\Assume{Suppose $a$ is odd.}
-				\UnaryInfC{$a = 2k+1$ for some integer $k$}
-				\UnaryInfC{$a^2 = 4k^2+4k+1$}
-				\UnaryInfC{$a^2$ is odd}
-			}
-			\UnaryInfC{$a^2$ is even $\Rightarrow$ $a$ is even}
+
+			\AlreadyProven{$a^2$ is even $\Rightarrow$ $a$ is even}
 			\BinaryInfC{$a$ is even}
 			\Hide
 		

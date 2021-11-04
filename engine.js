@@ -48,7 +48,7 @@ class ProofNode {
                             elementNext.style.display = "";
                         }, 500);
                     else
-                    elementNext.style.display = "none";
+                        elementNext.style.display = "none";
                     /* elementPremisses.style.visibility = (elementPremisses.style.visibility == "hidden") ? "" : "hidden";
                      elementNext.style.display = (elementNext.style.display == "none") ? "" : "none";
                      */
@@ -64,12 +64,15 @@ class ProofNode {
 
         domElements[this.conclusion] = element;
 
-        if (this.info) {
-            const elementInfo = document.createElement("info");
-            elementInfo.innerHTML = "?";
-            elementInfo.onclick = () => { alert(this.info) };
-            elementInfer.appendChild(elementInfo);
-        }
+        if (this.label)
+            domElements[this.label] = element;
+
+        /*    if (this.info) {
+                const elementInfo = document.createElement("info");
+                elementInfo.innerHTML = "?";
+                elementInfo.onclick = () => { alert(this.info) };
+                elementInfer.appendChild(elementInfo);
+            }*/
 
 
         element.appendChild(elementInfer);
@@ -84,6 +87,13 @@ class Assumption {
     toDOM() {
         const element = document.createElement("assumption");
         element.innerHTML = this.assumption;
+
+        domElements[this.conclusion] = element;
+
+        if (this.label)
+            domElements[this.label] = element;
+
+            
         return element;
     }
 }
@@ -167,8 +177,11 @@ function linesToProof(lines) {
         else if (line.startsWith("\\AxiomC")) {
             nodes.push(new ProofNode(extractContent(line)));
         }
-        if (line.startsWith("\\Info")) {
-            nodes[nodes.length - 1].setInfo(extractContent(line));
+        /*  if (line.startsWith("\\Info")) {
+              nodes[nodes.length - 1].setInfo(extractContent(line));
+          }*/
+        else if (line.startsWith("\\Label")) {
+            nodes[nodes.length - 1].label = extractContent(line);
         }
         if (line.startsWith("\\Assume")) {
             nodes.push(new Assumption(extractContent(line)));
@@ -179,12 +192,12 @@ function linesToProof(lines) {
         if (line.startsWith("\\Hide")) {
             nodes[nodes.length - 1].proofhidden = true;
         }
-        else if (line.startsWith("\\UnaryInfC")|| line.startsWith("infer{")) {
+        else if (line.startsWith("\\UnaryInfC") || line.startsWith("infer{")) {
             const node = new ProofNode(extractContent(line));
             node.addPremisse(testExist(nodes.pop()));
             nodes.push(node);
         }
-        else if (line.startsWith("\\BinaryInfC")|| line.startsWith("infer2{")) {
+        else if (line.startsWith("\\BinaryInfC") || line.startsWith("infer2{")) {
             const node = new ProofNode(extractContent(line));
             node.addPremisse(testExist(nodes.pop()));
             node.addPremisse(testExist(nodes.pop()));
@@ -241,26 +254,26 @@ async function load(filename) {
 }
 
 window.onload = () => {
-    document.querySelectorAll("#menu a").forEach(function(a) {
+    document.querySelectorAll("#menu a").forEach(function (a) {
         a.href = `?id=${a.id}`;
-      });
+    });
 
-      let url = window.location.toString();
-      let split = url.split('?');
+    let url = window.location.toString();
+    let split = url.split('?');
 
-      if(split.length > 1) {
+    if (split.length > 1) {
         let searchParams = new URLSearchParams(split[1]);
-        if(searchParams.get("id")) {
+        if (searchParams.get("id")) {
             const id = searchParams.get("id");
             console.log("loading " + id)
             load(id);
         }
-      }
-      
+    }
+
 
     //load("bidirectional");
     // load("karp-lipton");
-//    load("dijkstra");
+    //    load("dijkstra");
 
 
 }

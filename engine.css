@@ -1,13 +1,11 @@
-
-
 #menu a {
     cursor: pointer;
-    display:block;
+    display: block;
 }
 
 
 a:hover {
-    color:blue;
+    color: blue;
 }
 
 
@@ -16,6 +14,7 @@ proofs {
     align-items: flex-end;
     transition: all 500ms;
     transform-origin: bottom;
+    justify-content: center;
 }
 
 proof {
@@ -36,7 +35,7 @@ content {
 }
 
 proofs>content {
-    background-color: rgba(255, 128, 128, 0.2);
+    background: linear-gradient(to bottom, rgba(255, 128, 128, 0.2), rgba(128, 128, 255, 0.2));
 }
 
 infer {
@@ -52,14 +51,14 @@ buttonDevelop {
     display: flex;
     text-align: center;
     cursor: pointer;
-    background-color:rgba(255, 128, 128, 0.2);
-    width:50%;
+    color: blue;
+    width: 50%;
     flex-flow: column;
-    margin-left:25%;
-    margin-right:25%;
+    margin-left: 25%;
+    margin-right: 25%;
     border-radius: 8px;
 
-    
+
 }
 
 
@@ -72,60 +71,71 @@ info {
 }
 
 assumption {
-    background: rgba(255, 255, 128, 0.5);
+    border-top: 1px dashed black;
     border-radius: 8px;
     padding: 8px;
     margin: 6px;
     display: block;
     text-align: center;
+    font-weight: bold;
 }
 
 
 
-.developpable:hover {
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) repeat;
+.developpable {
+    color: blue;
 }
 
 
 .shake {
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
 }
 
 
 
 .show {
     opacity: 1.0;
-    max-width:2000px;
-    max-height:2000px;
-    scale:1.0;
+    max-width: 2000px;
+    max-height: 2000px;
+    scale: 1.0;
 }
 
 
 .hide {
     opacity: 0.0;
-    max-width:0px;
-    max-height:0px;
-    scale:0.0;
+    max-width: 0px;
+    max-height: 0px;
+    scale: 0.0;
 }
 
 alreadyprovenfact {
     color: blue;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    padding: 8px;
 }
 
 @keyframes shake {
-    10%, 90% {
-      transform: translate3d(-1px, 0, 0);
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
     }
-    
-    20%, 80% {
-      transform: translate3d(2px, 0, 0);
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
     }
-  
-    30%, 50%, 70% {
-      transform: translate3d(-4px, 0, 0);
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
     }
-  
-    40%, 60% {
-      transform: translate3d(4px, 0, 0);
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
     }
-  }
+}
