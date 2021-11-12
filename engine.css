@@ -81,6 +81,33 @@ assumption {
 }
 
 
+case {
+    border-radius: 8px;
+    padding: 8px;
+    margin: 6px;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+case:before {
+    content: "case ";
+    display: inline-block;
+    padding-right: 4px;
+    font-size: 8px;
+}
+
+
+
+assumption:before {
+    content: "assumption: ";
+    display: inline-block;
+    padding-right: 4px;
+    font-size: 8px;
+}
+
+
 
 .developpable {
     color: blue;

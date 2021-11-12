@@ -13,23 +13,27 @@
 }
 
 {
+    {
     \Assume{Suppose at some point (when no all vertices are popped) that for all popped $t$, $d[t] = \delta(t)$}
     \Label{invariant}
     \UnaryInfC{Let $u$ be the next vertex to be popped.}
 
-    \Assume{$u = s$}
+    \Case{$u = s$}
     \UnaryInfC{$d[u] = \delta(u) = 0$}
 
-    \Assume{$u \neq s$ and no path from $s$ to $u$}
+    \Case{$u \neq s$ and no path from $s$ to $u$}
     \UnaryInfC{$d[u] = \delta(u) = +\infty$}
 
     {
-        \Assume{$u \neq s$ and there exists a path from $s$ to $u$}
+        {
+	\Case{$u \neq s$ and there exists a path from $s$ to $u$}
         \UnaryInfC{Consider a shortest path $\pi$ from $s$ to $u$}
         \UnaryInfC{Let $y$ the first vertex in $\pi$ that is in the priority queue}
         \UnaryInfC{Let $x$ the predecessor of $y$ in $\pi$}
         \UnaryInfC{$x$ is not in the priority queue}
         \Label{$x$ has been popped}
+        \UnaryInfC{<img src="img/dijkstra_path.png"/>}
+	}
         
                     \AlreadyProven{invariant}
                     \AlreadyProven{$x$ has been popped}
@@ -44,7 +48,7 @@
                     \AxiomC{$\pi[s..y] := \pi[s..x].y$}
                     \TrinaryInfC{$\delta(y) = \delta[x] + weight(x, y)$}
 
-                \TrinaryInfC{$d[y] \leq \delta[y]$}
+                \BinaryInfC{$d[y] \leq \delta[y]$}
             
 
 
@@ -67,10 +71,11 @@
     \UnaryInfC{$d[u] = \delta(u)$}
 
 
-
-
     infer3{$d[u] = \delta[u]$}
 }
+}
+\UnaryInfC{Maintenance of the invariant}
+
 infer2{for all popped $t$, $d[t] = \delta(t)$ is an invariant}
 
 

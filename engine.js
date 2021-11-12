@@ -98,7 +98,22 @@ class Assumption {
     }
 }
 
+class Case {
+    constructor(assumption) { this.assumption = assumption; }
 
+    toDOM() {
+        const element = document.createElement("case");
+        element.innerHTML = this.assumption;
+
+        domElements[this.conclusion] = element;
+
+        if (this.label)
+            domElements[this.label] = element;
+
+            
+        return element;
+    }
+}
 
 
 class AlreadyProvenFact {
@@ -185,6 +200,9 @@ function linesToProof(lines) {
         }
         if (line.startsWith("\\Assume")) {
             nodes.push(new Assumption(extractContent(line)));
+        }
+        else if (line.startsWith("\\Case")) {
+            nodes.push(new Case(extractContent(line)));
         }
         if (line.startsWith("\\AlreadyProven")) {
             nodes.push(new AlreadyProvenFact(extractContent(line)));

@@ -5,6 +5,7 @@
 		\UnaryInfC{$a^2 = 4k^2+4k+1$}
 		\UnaryInfC{$a^2$ is odd}
 	}
+	\UnaryInfC{$a$ is odd $\Rightarrow$ $a^2$ is odd}
 	\UnaryInfC{$a^2$ is even $\Rightarrow$ $a$ is even}
 	\Label{$b^2$ is even $\Rightarrow$ $b$ is even}
 }
