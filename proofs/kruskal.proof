@@ -76,12 +76,13 @@
 
 \AlreadyProven{Invariant true at the end}
 \UnaryInfC{$(V, E)$ is acyclic}
-
-\Assume{$G$ is connected}
-\UnaryInfC{There is a path from any node $x$ to $y$ in $G$}
-\AlreadyProven{$G$ is connected}
-\UnaryInfC{In that path, replace any edge $(u, v)$ not in $E$ by a $E$-subpath from $u$ to $v$}
-\BinaryInfC{There is a $E$-path from any node $x$ to $y$ in $G$}
+{
+    \Assume{$G$ is connected}
+    \UnaryInfC{There is a path from any node $x$ to $y$ in $G$}
+    \AlreadyProven{$G$ is connected}
+    \UnaryInfC{In that path, replace any edge $(u, v)$ not in $E$ by a $E$-subpath from $u$ to $v$}
+    \BinaryInfC{There is a $E$-path from any node $x$ to $y$ in $G$}
+}
 \UnaryInfC{$(V, E)$ is connected}
 \BinaryInfC{The returned $(V, E)$ is tree}
 \BinaryInfC{Kruskal's algorithm returns a minimum spanning tree}
