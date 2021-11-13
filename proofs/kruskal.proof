@@ -11,16 +11,20 @@
     \UnaryInfC{The invariant still holds with the tree $T$}
 {
     \Case{$\{x, y\} \not \in T$}
+    \UnaryInfC{<img src="img/kruskalET.png"/>}
     \AlreadyProven{Invariant assumption}
     \UnaryInfC{$T$ is a tree}
     \UnaryInfC{$T$ is connected}
     \UnaryInfC{there is a path from $x$ to $y$ in $T$}
     \AxiomC{$(x, y)$ is added to $E$}
+    \UnaryInfC{No $E$-path from $x$ to $y$}
     \BinaryInfC{that path does not contain edges from $E \setminus \{x, y\}$ only}
     \UnaryInfC{One edge $\{u, v\}$ from that path is in $T \setminus E$}
+    \Label{$(u, v) \not \in E$}
 
     \BinaryInfC{Let $T' := T \uplus \{(x, y)\} \setminus \{(u, v)\}$}
     \Label{Definition of $T'$}
+    \UnaryInfC{<img src="img/kruskalETprime.png"/>}
 
 
 \AxiomC{$T$ is a spanning tree}
@@ -43,10 +47,10 @@
         {
         \Assume{$(u, v)$ was considered before}
 
-        \AxiomC{$(u, v) \not \in E$}
+        \AlreadyProven{$(u, v) \not \in E$}
         \UnaryInfC{$(u, v)$ was not added}
         \UnaryInfC{Already a path from $u$ to $v$ in $E \setminus \{(x, y)\}$}
-        \UnaryInfC{Already a path from $u$ to $v$ in $T$}
+        \UnaryInfC{Already a path from $u$ to $v$ in $T$ not containing $\{u, v\}$}
         \AxiomC{$(u, v) \in T$}
         \BinaryInfC{Cycle in $T$}
         \AxiomC{$T$ is tree}
@@ -75,7 +79,8 @@
 
 \Assume{$G$ is connected}
 \UnaryInfC{There is a path from any node $x$ to $y$ in $G$}
-\AxiomC{In that path, replace any edge $(u, v)$ not $E$ by a $E$-subpath from $u$ to $v$}
+\AlreadyProven{$G$ is connected}
+\UnaryInfC{In that path, replace any edge $(u, v)$ not in $E$ by a $E$-subpath from $u$ to $v$}
 \BinaryInfC{There is a $E$-path from any node $x$ to $y$ in $G$}
 \UnaryInfC{$(V, E)$ is connected}
 \BinaryInfC{The returned $(V, E)$ is tree}
