@@ -33,27 +33,20 @@ class ProofNode {
                 elementNext.classList.add("developpable");
 
                 elementPremisses.classList.add("hide");
-                // elementPremisses.style.visibility = "hidden";
-                //console.log("miaou : " + elementPremisses.clientWidth)
 
                 const toggle = () => {
-                    elementPremisses.style.display = "";//(elementPremisses.style.display == "none") ? "" : "none";
+                    elementPremisses.style.display = "";
 
                     elementPremisses.classList.toggle("hide");
                     elementPremisses.classList.toggle("show");
 
                     if (elementPremisses.classList.contains("hide"))
                         setTimeout(() => {
-                            //elementPremisses.style.display = "none"
                             elementNext.style.display = "";
                         }, 500);
                     else
                         elementNext.style.display = "none";
-                    /* elementPremisses.style.visibility = (elementPremisses.style.visibility == "hidden") ? "" : "hidden";
-                     elementNext.style.display = (elementNext.style.display == "none") ? "" : "none";
-                     */
                 }
-                //  toggle();
                 elementInfer.onclick = toggle;
                 elementNext.onclick = toggle;
             }
@@ -61,6 +54,9 @@ class ProofNode {
 
 
         elementInfer.innerHTML = this.conclusion;
+
+        if (this.conclusion == "Contradiction")
+            elementInfer.classList.add("contradiction");
 
         domElements[this.conclusion] = element;
 
@@ -93,7 +89,7 @@ class Assumption {
         if (this.label)
             domElements[this.label] = element;
 
-            
+
         return element;
     }
 }
@@ -110,7 +106,7 @@ class Case {
         if (this.label)
             domElements[this.label] = element;
 
-            
+
         return element;
     }
 }
