@@ -1,5 +1,5 @@
 \Assume{The graph $G$ is connected}
-\UnaryInfC{$G$ is a minimum spanning tree}
+\UnaryInfC{$G$ has a minimum spanning tree}
 \UnaryInfC{Initialization: At the beginning $E = \emptyset$ so the invariant is true}
 
 
