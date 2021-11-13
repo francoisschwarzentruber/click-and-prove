@@ -77,7 +77,15 @@ assumption {
     display: block;
     text-align: center;
     font-weight: bold;
+    border-image-slice: 33% 33% 33% 33%;
+    border-image-width: 0.8em;
+    border-image-outset: 0px 0px 0px 0px;
+    border-image-repeat: round round;
+    border-image-source: url("img/cloud.png");
+    background-color: white;
+    background-clip: content-box; 
 }
+
 
 
 case {
@@ -87,6 +95,7 @@ case {
     display: block;
     text-align: center;
     font-weight: bold;
+    color: green
 }
 
 

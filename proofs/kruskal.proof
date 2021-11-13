@@ -7,66 +7,70 @@
     \Assume{there is a minimum spanning tree $T$ such that $E \setminus \{(x, y)\} \subseteq T$ where $(x, y)$ is the added edge}
     \Label{Invariant assumption}
 
-    \Case{$\{x, y\} \in T$}
-    \UnaryInfC{The invariant still holds with the tree $T$}
-{
-    \Case{$\{x, y\} \not \in T$}
-    \UnaryInfC{<img src="img/kruskalET.png"/>}
-    \AlreadyProven{Invariant assumption}
-    \UnaryInfC{$T$ is a tree}
-    \UnaryInfC{$T$ is connected}
-    \UnaryInfC{there is a path from $x$ to $y$ in $T$}
-    \AxiomC{$(x, y)$ is added to $E$}
-    \UnaryInfC{No $E$-path from $x$ to $y$}
-    \BinaryInfC{that path does not contain edges from $E \setminus \{x, y\}$ only}
-    \UnaryInfC{One edge $\{u, v\}$ from that path is in $T \setminus E$}
-    \Label{$(u, v) \not \in E$}
-
-    \BinaryInfC{Let $T' := T \uplus \{(x, y)\} \setminus \{(u, v)\}$}
-    \Label{Definition of $T'$}
-    \UnaryInfC{<img src="img/kruskalETprime.png"/>}
-
-
-\AxiomC{$T$ is a spanning tree}
-\UnaryInfC{$|T| = |V|-1$}
-\AlreadyProven{Definition of $T'$}
-\BinaryInfC{$|T'| = |V|-1$}
-
-\AxiomC{$T$ is a spanning tree}
-\UnaryInfC{$T$ is connected}
-\AxiomC{We can get rid off $(u, v)$ in any path in $T$ by replacing it by $u -^* x - y -^* v$}
-\BinaryInfC{$T'$ is connected}
-    \BinaryInfC{$T'$ is a spanning tree}
-    {
-    \AlreadyProven{Definition of $T'$}
-    \UnaryInfC{$weight(T') = weight(T) + weight((x, y)) - weight(u, v)$}
-
-    \AxiomC{$(x, y)$ was chosen to be added to $E$ and not $(u, v)$}
-
-
+    
+        \Case{$\{x, y\} \in T$}
+        \UnaryInfC{The invariant still holds with the tree $T$}
         {
-        \Assume{$(u, v)$ was considered before}
+            \Case{$\{x, y\} \not \in T$}
+            \UnaryInfC{<img src="img/kruskalET.png"/>}
+            \AlreadyProven{Invariant assumption}
+            \UnaryInfC{$T$ is a tree}
+            \UnaryInfC{$T$ is connected}
+            \UnaryInfC{there is a path from $x$ to $y$ in $T$}
+            \AxiomC{$(x, y)$ is added to $E$}
+            \UnaryInfC{No $E$-path from $x$ to $y$}
+            \BinaryInfC{that path does not contain edges from $E \setminus \{x, y\}$ only}
+            \UnaryInfC{One edge $\{u, v\}$ from that path is in $T \setminus E$}
+            \Label{$(u, v) \not \in E$}
 
-        \AlreadyProven{$(u, v) \not \in E$}
-        \UnaryInfC{$(u, v)$ was not added}
-        \UnaryInfC{Already a path from $u$ to $v$ in $E \setminus \{(x, y)\}$}
-        \UnaryInfC{Already a path from $u$ to $v$ in $T$ not containing $\{u, v\}$}
-        \AxiomC{$(u, v) \in T$}
-        \BinaryInfC{Cycle in $T$}
-        \AxiomC{$T$ is tree}
-        \BinaryInfC{Contradiction}
+            \BinaryInfC{Let $T' := T \uplus \{(x, y)\} \setminus \{(u, v)\}$}
+            \Label{Definition of $T'$}
+            \UnaryInfC{<img src="img/kruskalETprime.png"/>}
+
+
+            \AxiomC{$T$ is a spanning tree}
+            \UnaryInfC{$|T| = |V|-1$}
+            \AlreadyProven{Definition of $T'$}
+            \BinaryInfC{$|T'| = |V|-1$}
+
+            \AxiomC{$T$ is a spanning tree}
+            \UnaryInfC{$T$ is connected}
+            \AxiomC{We can get rid off $(u, v)$ in any path in $T$ by replacing it by $u -^* x - y -^* v$}
+            \BinaryInfC{$T'$ is connected}
+            \BinaryInfC{$T'$ is a spanning tree}
+            {
+                \AlreadyProven{Definition of $T'$}
+                \UnaryInfC{$weight(T') = weight(T) + weight((x, y)) - weight(u, v)$}
+
+                \AxiomC{$(x, y)$ was chosen to be added to $E$ and not $(u, v)$}
+
+
+                {
+                \Assume{$(u, v)$ was considered before}
+
+                \AlreadyProven{$(u, v) \not \in E$}
+                \UnaryInfC{$(u, v)$ was not added}
+                \UnaryInfC{Already a path from $u$ to $v$ in $E \setminus \{(x, y)\}$}
+                \UnaryInfC{Already a path from $u$ to $v$ in $T$ not containing $\{u, v\}$}
+                \AxiomC{$(u, v) \in T$}
+                \BinaryInfC{Cycle in $T$}
+                \AxiomC{$T$ is tree}
+                \BinaryInfC{Contradiction}
+                }
+            \UnaryInfC{$(u, v)$ was not considered before}
+            \BinaryInfC{$weight((x, y)) \leq weight(u, v)$}
+                \BinaryInfC{$weight(T') \leq weight(T)$}
+            }
+            \UnaryInfC{$T'$'s weight is minimum}
+
+            \BinaryInfC{$T'$ is minimum spanning tree}
+            \BinaryInfC{The invariant still holds with the tree $T'$}
         }
-    \UnaryInfC{$(u, v)$ was not considered before}
-    \BinaryInfC{$weight((x, y)) \leq weight(u, v)$}
-        \BinaryInfC{$weight(T') \leq weight(T)$}
-    }
-    \UnaryInfC{$T'$'s weight is minimum}
-
-    \BinaryInfC{$T'$ is minimum spanning tree}
-    \BinaryInfC{The invariant still holds with the tree $T'$}
-    }
-    \UnaryInfC{The invariant still holds}
+        \UnaryInfC{The invariant still holds}
+    
     \BinaryInfC{The invariant still holds}
+    \InferByCaseStudy
+    
 
 }
 \UnaryInfC{Conservation: Invariant is maintained}

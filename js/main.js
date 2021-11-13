@@ -3,11 +3,11 @@ let domElements = {};
 
 
 class ProofNode {
-    conclusion;
+    content;
     premisses = [];
     info = undefined;
     proofhidden = false;
-    constructor(conclusion) { this.conclusion = conclusion; }
+    constructor(content) { this.content = content; }
     addPremisse(premisse) { this.premisses.unshift(premisse); }
 
     setInfo(info) { this.info = info; }
@@ -23,8 +23,15 @@ class ProofNode {
             element.appendChild(elementPremisses);
 
             if (this.proofhidden || (this.premisses.length == 1 && this.premisses[0] instanceof Sequence)) {
+                const caseNode = getCaseNodeIfAny(this.premisses[0]);
+
                 const elementNext = document.createElement("buttonDevelop");
+
+                const elementCase = caseNode ? caseNode.toDOM() : undefined;
                 elementNext.innerHTML = "...";
+                if (elementCase)
+                    element.appendChild(elementCase);
+
                 element.appendChild(elementNext);
 
                 elementInfer.style.cursor = "pointer";
@@ -42,10 +49,16 @@ class ProofNode {
 
                     if (elementPremisses.classList.contains("hide"))
                         setTimeout(() => {
+                            if (elementCase)
+                                elementCase.style.display = "";
                             elementNext.style.display = "";
                         }, 500);
-                    else
+                    else {
                         elementNext.style.display = "none";
+                        if (elementCase)
+                            elementCase.style.display = "none";
+                    }
+
                 }
                 elementInfer.onclick = toggle;
                 elementNext.onclick = toggle;
@@ -53,12 +66,12 @@ class ProofNode {
         }
 
 
-        elementInfer.innerHTML = this.conclusion;
+        elementInfer.innerHTML = this.content;
 
-        if (this.conclusion == "Contradiction")
+        if (this.content == "Contradiction")
             elementInfer.classList.add("contradiction");
 
-        domElements[this.conclusion] = element;
+        domElements[this.content] = element;
 
         if (this.label)
             domElements[this.label] = element;
@@ -74,15 +87,22 @@ class ProofNode {
         element.appendChild(elementInfer);
         return element;
     }
+
+
+
+
 }
 
 
+
+
+
 class Assumption {
-    constructor(assumption) { this.assumption = assumption; }
+    constructor(content) { this.content = content; }
 
     toDOM() {
         const element = document.createElement("assumption");
-        element.innerHTML = this.assumption;
+        element.innerHTML = this.content;
 
         domElements[this.conclusion] = element;
 
@@ -92,14 +112,22 @@ class Assumption {
 
         return element;
     }
+
+
+
+
+
 }
 
+
+
+
 class Case {
-    constructor(assumption) { this.assumption = assumption; }
+    constructor(content) { this.content = content; }
 
     toDOM() {
         const element = document.createElement("case");
-        element.innerHTML = this.assumption;
+        element.innerHTML = this.content;
 
         domElements[this.conclusion] = element;
 
@@ -113,14 +141,14 @@ class Case {
 
 
 class AlreadyProvenFact {
-    constructor(assumption) { this.assumption = assumption; }
+    constructor(content) { this.content = content; }
 
     toDOM() {
         const element = document.createElement("alreadyprovenfact");
-        element.innerHTML = this.assumption;
+        element.innerHTML = this.content;
 
         element.onclick = () => {
-            const fact = domElements[this.assumption];
+            const fact = domElements[this.content];
             if (fact)
                 fact.classList.add("shake");
             setTimeout(() => fact.classList.remove("shake"), 1000);
@@ -129,9 +157,10 @@ class AlreadyProvenFact {
     }
 }
 
+
+
 class Sequence {
     content = [];
-    addContent(content) { this.content.push(...content); }
 
     constructor(content) {
         this.content = content;
@@ -145,6 +174,50 @@ class Sequence {
         return element;
     }
 }
+
+
+
+
+
+
+
+function getCaseNodeIfAny(obj) {
+    function getCaseNodeIfAnyRec(obj) {
+        if (obj instanceof Sequence) {
+            const cases = obj.content.map(getCaseNodeIfAnyRec);
+            const realCases = cases.filter((o) => o != undefined);
+            if (realCases.length == 1)
+                return realCases[0];
+            else
+                return undefined;
+        }
+        else if (obj instanceof Case)
+            return obj;
+        else if (obj instanceof ProofNode) {
+            if (obj.inferByCaseStudy)
+                return undefined;
+            const cases = obj.premisses.map(getCaseNodeIfAnyRec);
+            const realCases = cases.filter((o) => o != undefined);
+            if (realCases.length == 1)
+                return realCases[0];
+            else
+                return undefined;
+        }
+
+        return undefined;
+    }
+
+
+    if (obj instanceof Sequence) {
+        for (const o of obj.content) {
+            const caseNode = getCaseNodeIfAnyRec(o);
+            if (caseNode)
+                return caseNode;
+        }
+    }
+    return undefined;
+}
+
 
 
 function extractContent(line) {
@@ -205,6 +278,9 @@ function linesToProof(lines) {
         }
         if (line.startsWith("\\Hide")) {
             nodes[nodes.length - 1].proofhidden = true;
+        }
+        if (line.startsWith("\\InferByCaseStudy")) {
+            nodes[nodes.length - 1].inferByCaseStudy = true;
         }
         else if (line.startsWith("\\UnaryInfC") || line.startsWith("infer{")) {
             const node = new ProofNode(extractContent(line));
