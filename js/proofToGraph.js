@@ -1,0 +1,6 @@
+function proofToGraph(proof) {
+    
+
+
+
+}
