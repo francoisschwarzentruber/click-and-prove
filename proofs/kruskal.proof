@@ -74,7 +74,7 @@
     
 
 }
-\UnaryInfC{Conservation: Invariant is maintained}
+\UnaryInfC{Maintenance: Invariant is maintained}
 
 \BinaryInfC{Invariant: there is a minimum spanning tree $T$ such that $X \subseteq T$}
 \Label{Invariant true at the end}
