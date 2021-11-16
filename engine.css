@@ -180,3 +180,12 @@ alreadyprovenfact {
 .contradiction:after {
     content: " 💣";
 }
+
+
+
+#help {
+    background-color: aqua;
+    border: 1px green solid;
+    padding: 4px;
+    border-radius: 4px;
+}
