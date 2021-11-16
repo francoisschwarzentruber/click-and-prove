@@ -1,14 +1,15 @@
 \Assume{The graph $G$ is connected}
 \UnaryInfC{$G$ has a minimum spanning tree}
-\UnaryInfC{Initialization: At the beginning $E = \emptyset$ so the invariant is true}
+\UnaryInfC{Initialization: At the beginning $X = \emptyset$ so the invariant is true}
 
 
 {
-    \Assume{there is a minimum spanning tree $T$ such that $E \setminus \{(x, y)\} \subseteq T$ where $(x, y)$ is the added edge}
+    \Assume{there is a minimum spanning tree $T$ such that $X \setminus \{(x, y)\} \subseteq T$ where $(x, y)$ is the added edge}
     \Label{Invariant assumption}
 
     
         \Case{$\{x, y\} \in T$}
+        \UnaryInfC{$X \subseteq T$}
         \UnaryInfC{The invariant still holds with the tree $T$}
         {
             \Case{$\{x, y\} \not \in T$}
@@ -17,11 +18,11 @@
             \UnaryInfC{$T$ is a tree}
             \UnaryInfC{$T$ is connected}
             \UnaryInfC{there is a path from $x$ to $y$ in $T$}
-            \AxiomC{$(x, y)$ is added to $E$}
-            \UnaryInfC{No $E$-path from $x$ to $y$}
-            \BinaryInfC{that path does not contain edges from $E \setminus \{x, y\}$ only}
-            \UnaryInfC{One edge $\{u, v\}$ from that path is in $T \setminus E$}
-            \Label{$(u, v) \not \in E$}
+            \AxiomC{$(x, y)$ is added to $X$}
+            \UnaryInfC{No $X$-path from $x$ to $y$}
+            \BinaryInfC{that path does not contain edges from $X \setminus \{x, y\}$ only}
+            \UnaryInfC{One edge $\{u, v\}$ from that path is in $T \setminus X$}
+            \Label{$(u, v) \not \in X$}
 
             \BinaryInfC{Let $T' := T \uplus \{(x, y)\} \setminus \{(u, v)\}$}
             \Label{Definition of $T'$}
@@ -42,15 +43,15 @@
                 \AlreadyProven{Definition of $T'$}
                 \UnaryInfC{$weight(T') = weight(T) + weight((x, y)) - weight(u, v)$}
 
-                \AxiomC{$(x, y)$ was chosen to be added to $E$ and not $(u, v)$}
+                \AxiomC{$(x, y)$ was chosen to be added to $X$ and not $(u, v)$}
 
 
                 {
                 \Assume{$(u, v)$ was considered before}
 
-                \AlreadyProven{$(u, v) \not \in E$}
+                \AlreadyProven{$(u, v) \not \in X$}
                 \UnaryInfC{$(u, v)$ was not added}
-                \UnaryInfC{Already a path from $u$ to $v$ in $E \setminus \{(x, y)\}$}
+                \UnaryInfC{Already a path from $u$ to $v$ in $X \setminus \{(x, y)\}$}
                 \UnaryInfC{Already a path from $u$ to $v$ in $T$ not containing $\{u, v\}$}
                 \AxiomC{$(u, v) \in T$}
                 \BinaryInfC{Cycle in $T$}
@@ -75,18 +76,18 @@
 }
 \UnaryInfC{Conservation: Invariant is maintained}
 
-\BinaryInfC{Invariant: there is a minimum spanning tree $T$ such that $E \subseteq T$}
+\BinaryInfC{Invariant: there is a minimum spanning tree $T$ such that $X \subseteq T$}
 \Label{Invariant true at the end}
 
 \AlreadyProven{Invariant true at the end}
-\UnaryInfC{$(V, E)$ is acyclic}
+\UnaryInfC{$(V, X)$ is acyclic}
 {
     \Assume{$G$ is connected}
     \UnaryInfC{There is a path from any node $x$ to $y$ in $G$}
     \AlreadyProven{$G$ is connected}
-    \UnaryInfC{In that path, replace any edge $(u, v)$ not in $E$ by a $E$-subpath from $u$ to $v$}
-    \BinaryInfC{There is a $E$-path from any node $x$ to $y$ in $G$}
+    \UnaryInfC{In that path, replace any edge $(u, v)$ not in $X$ by a $X$-subpath from $u$ to $v$}
+    \BinaryInfC{There is a $X$-path from any node $x$ to $y$ in $G$}
 }
-\UnaryInfC{$(V, E)$ is connected}
-\BinaryInfC{The returned $(V, E)$ is tree}
+\UnaryInfC{$(V, X)$ is connected}
+\BinaryInfC{The returned $(V, X)$ is tree}
 \BinaryInfC{Kruskal's algorithm returns a minimum spanning tree}
