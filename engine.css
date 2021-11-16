@@ -184,8 +184,9 @@ alreadyprovenfact {
 
 
 #help {
-    background-color: aqua;
+    background-color: greenyellow;
     border: 1px green solid;
     padding: 4px;
-    border-radius: 4px;
+    border-radius: 8px;
+    text-decoration: none;
 }
