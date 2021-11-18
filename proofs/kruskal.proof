@@ -34,8 +34,7 @@
             \AlreadyProven{Definition of $T'$}
             \BinaryInfC{$|T'| = |V|-1$}
 
-            \AxiomC{$T$ is a spanning tree}
-            \UnaryInfC{$T$ is connected}
+            \AlreadyProven{$T$ is connected}
             \AxiomC{We can get rid off $(u, v)$ in any path in $T$ by replacing it by $u -^* x - y -^* v$}
             \BinaryInfC{$T'$ is connected}
             \BinaryInfC{$T'$ is a spanning tree}

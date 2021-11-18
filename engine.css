@@ -11,6 +11,7 @@ a:hover {
 
 proofs {
     display: flex;
+    /*display: block;*/
     align-items: flex-end;
     transition: all 500ms;
     transform-origin: bottom;
@@ -19,6 +20,7 @@ proofs {
 
 proof {
     display: inline-block;
+ /* display: block;*/
     margin-left: 4px;
     margin-right: 8px;
     margin-top: 8px;
@@ -83,7 +85,7 @@ assumption {
     border-image-repeat: round round;
     border-image-source: url("img/cloud.png");
     background-color: white;
-    background-clip: content-box; 
+    background-clip: content-box;
 }
 
 
@@ -190,3 +192,37 @@ alreadyprovenfact {
     border-radius: 8px;
     text-decoration: none;
 }
+
+
+.tobeproven {
+    background: radial-gradient(circle at center, orange 0, rgba(0, 0, 0, 0) 100%);
+    /*border-left: orange 2px solid;
+    border-right: orange 2px solid;
+    border-bottom: orange 2px solid;
+    border-radius: 0px 0px 16px 16px;*/
+    
+}
+
+
+
+.tobeproven:hover {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse{
+  from {
+    background-size:100% 100%;
+  }
+  50% {
+    background-size:50% 50%;
+  }
+  to {
+    background-size:100% 100%;
+  }
+}
+  
+.proven {
+    background: radial-gradient(circle at center, yellow 0, rgba(0, 0, 0, 0) 100%)
+}
+
+
